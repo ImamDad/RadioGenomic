@@ -1,0 +1,71 @@
+{
+  "model": {
+    "ct_dim": 131,
+    "pet_dim": 131,
+    "clinical_dim": 45,
+    "genomic_dim": 50,
+    "embedding_dim": 64,
+    "hidden_dim": 128,
+    "graph_dim": 512,
+    "num_heads": 8,
+    "num_layers": 3,
+    "dropout": 0.3,
+    "learning_rate": 0.0003,
+    "weight_decay": 0.01,
+    "batch_size": 16,
+    "num_epochs": 100,
+    "early_stopping_patience": 50,
+    "use_transfer_learning": true,
+    "use_synthetic_augmentation": true,
+    "n_synthetic_samples": 500,
+    "compress_model": true,
+    "compression_ratio": 0.5,
+    "device": "cuda"
+  },
+  "training": {
+    "optimizer": "adamw",
+    "scheduler": "cosine",
+    "warmup_epochs": 5,
+    "focal_gamma": 2.0,
+    "focal_alpha": 0.25,
+    "mc_passes": 50,
+    "mc_dropout_rate": 0.3,
+    "augment_missing_modalities": true,
+    "missing_probability": 0.3,
+    "log_interval": 10,
+    "save_interval": 10,
+    "checkpoint_dir": "./checkpoints",
+    "log_dir": "./logs"
+  },
+  "data": {
+    "data_dir": "./data",
+    "split_by_year": true,
+    "year_split": [1994, 1995, 1996],
+    "use_robust_scaler": true,
+    "n_radiomic_features": 131,
+    "n_pathways": 50,
+    "impute_strategy": "median",
+    "categorical_encoding": "onehot"
+  },
+  "benchmark": {
+    "baseline_methods": [
+      "cox_ph",
+      "random_survival_forest",
+      "deepsurv",
+      "mlp",
+      "han",
+      "hgt",
+      "sehgnn",
+      "fgcn",
+      "deepgraphsurv",
+      "mmt",
+      "amf",
+      "lastgan",
+      "multisurv",
+      "transformer_graph"
+    ],
+    "n_cv_folds": 5,
+    "n_bayesian_trials": 50,
+    "random_seed": 42
+  }
+}
